@@ -33,10 +33,10 @@ gem 'pg'
 gem 'activerecord-import'
 
 # pronto & pronto runners
-gem 'pronto'
-gem 'pronto-brakeman'
-gem 'pronto-rubocop'
-gem 'pronto-yamllint'
+# gem 'pronto'
+# gem 'pronto-brakeman'
+# gem 'pronto-rubocop'
+# gem 'pronto-yamllint'
 
 # json serializer
 gem 'fast_jsonapi'
