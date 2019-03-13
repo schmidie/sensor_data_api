@@ -1,0 +1,181 @@
+---
+openapi: 3.0.0
+info:
+  title: Energeer API
+  version: 0.1
+servers:
+  - url: /v1
+tags:
+  - name: user
+    description: User entry-points
+
+paths:
+  /auth:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      summary: create a new user
+      responses:
+        '200':
+          description: user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'
+  /auth/sign_in:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      summary: create a new user-token as login
+      responses:
+        '200':
+          description: user-token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'
+
+  /users:
+    get:
+      tags:
+        - user
+      security:
+        - token: []
+          client: []
+          uid: []
+      summary: Returns a list of users.
+      responses:
+        '200':
+          description: A JSON array of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'
+
+components:
+  securitySchemes:
+    token:
+      type: apiKey
+      in: header
+      name: access-token
+    client:
+      type: apiKey
+      in: header
+      name: client
+    uid:
+      type: apiKey
+      in: header
+      name: uid
+
+
+  schemas:
+    _IdType:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID of the resource
+        type:
+          type: string
+          description: Type of the resource
+    _ResourceDates:
+      type: object
+      properties:
+        attributes:
+          properties:
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    # _CommonResource:
+    #   allOf:
+    #     - $ref: '#/components/schemas/_IdType'
+    #     # - $ref: '#/components/schemas/_ResourceDates'
+
+    UserInput:
+      allOf:
+        - properties:
+            email:
+              type: string
+              format: email
+            password:
+              type: string
+              format: password
+    User:
+      allOf:
+        - $ref: '#/components/schemas/_IdType'
+        - properties:
+            type:
+              example: user
+            attributes:
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: the email of the user
+                sign_in_count:
+                  type: integer
+                  description: the count of user-sign-ins
+            relationships:
+              properties:
+                roles:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        allOf:
+                          - $ref: '#/components/schemas/_IdType'
+                          - properties:
+                              type:
+                                example: role
+    Role:
+      allOf:
+        - $ref: '#/components/schemas/_IdType'
+        - properties:
+            type:
+              example: role
+            attributes:
+              properties:
+                name:
+                  type: string
+                  example: admin
+                  description: the name of the role
