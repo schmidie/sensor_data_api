@@ -4,7 +4,7 @@ default: &default
 
 development:
   <<: *default
-  # database: development_energeer
+  # database: development
   username: 'postgres'
   password: 'postgres'
   host: 'localhost'
@@ -14,7 +14,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  # database: test_energeer<%= ENV['TEST_ENV_NUMBER'] %>
+  # database: test<%= ENV['TEST_ENV_NUMBER'] %>
 
 production:
   <<: *default

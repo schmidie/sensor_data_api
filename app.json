@@ -1,6 +1,6 @@
 {
-  "name": "API Energeer",
-  "description": "api energeer",
+  "name": "Sensor Data API",
+  "description": "api for managing sensor data",
   "scripts": {
     "dokku": {
       "postdeploy": "bin/rails db:migrate"
