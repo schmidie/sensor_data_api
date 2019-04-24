@@ -1,0 +1,17 @@
+# Configuration files
+config/environments/development.rb
+
+#Respec
+.respec_failures
+# rspec rerun
+rspec.failures
+
+# Ignore all logfiles and tempfiles
+/log/*.log
+/log/*.log.*
+/tmp
+
+.rvmrc
+
+# mac DS_Store
+*.DS_Store
