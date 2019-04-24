@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  extend Devise::Models
   rolify
 
   # Include default devise modules. Others available are:
