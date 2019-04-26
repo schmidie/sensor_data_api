@@ -21,21 +21,29 @@ Rails.application.routes.draw do
     # GET /v1/unities/<id>
     resources :unities, only: %i[show index create] do
       member do
-        # POST /v1/unities/<id>/node
-        post :nodes
-        # GET /v1/unities/<id>/nodes
-        get :nodes
+        # POST /v1/unities/<id>/create_node
+        post :create_node
+        # GET /v1/unities/<id>/get_nodes
+        get :get_nodes
       end
     end
 
     # node routes
     # GET /v1/nodes/<id>
     resources :nodes, only: %i[show] do
-      # POST /v1/nodes/<id>/sensors
-      resources :sensors, only: [:create]
+      member do
+        # POST /v1/nodes/<id>/create_sensor
+        post :create_sensor
+        # GET /v1/nodes/<id>/get_sensors
+        get :get_sensors
+      end
     end
+
+    # sensor routes
+    # GET /v1/sensors/<id>
+    resources :sensors, only: %i[show]
   end
 
   # for swagger docs
-  resources :docs, only: [:index]
+  resources :docs, only: %i[index]
 end

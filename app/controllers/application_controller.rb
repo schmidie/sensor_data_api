@@ -25,4 +25,9 @@ class ApplicationController < ActionController::API
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     # devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
+
+  def not_implemented
+    render status: :not_implemented,
+           json: { error: 'this entrypoint is not implemented yet. we are working on it. for more details please contact us.' }
+  end
 end
