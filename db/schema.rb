@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_131302) do
+ActiveRecord::Schema.define(version: 2019_04_24_185818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "nodes", force: :cascade do |t|
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "mac"
+    t.string "email"
+    t.json "tokens"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mac"], name: "index_nodes_on_mac", unique: true
+    t.index ["uid", "provider"], name: "index_nodes_on_uid_and_provider", unique: true
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
