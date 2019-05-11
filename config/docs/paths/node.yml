@@ -1,0 +1,27 @@
+paths:
+  /node/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: id of the node
+        required: true
+    get:
+      tags:
+        - node
+      security:
+        - token: []
+          client: []
+          uid: []
+      summary: get the node data
+      responses:
+        '200':
+          description: node
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Node'
