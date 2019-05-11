@@ -1,0 +1,28 @@
+paths:
+  /users:
+    get:
+      tags:
+        - user
+      security:
+        - token: []
+          client: []
+          uid: []
+      summary: Returns a list of users.
+      responses:
+        '200':
+          description: A JSON array of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'

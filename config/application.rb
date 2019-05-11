@@ -1,5 +1,7 @@
 require_relative 'boot'
 
+require 'rails/all'
+
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
@@ -16,7 +18,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Wiprav
+module API
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
@@ -31,5 +33,6 @@ module Wiprav
     config.api_only = true
 
     # config.logger = Logger.new(STDOUT)
+    config.autoload_paths << config.root.join('lib').to_s
   end
 end

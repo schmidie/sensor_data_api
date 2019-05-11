@@ -1,0 +1,72 @@
+paths:
+  /auth:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      summary: create a new user
+      responses:
+        '200':
+          description: user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'
+  /auth/sign_in:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      summary: create a new user-token as login
+      responses:
+        '200':
+          description: user-token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Role'
+
+  /node_auth/sign_in:
+    post:
+      tags:
+        - node
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NodeInput'
+      summary: create a new node-token as login
+      responses:
+        '200':
+          description: node-token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Node'

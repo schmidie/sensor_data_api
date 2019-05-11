@@ -1,0 +1,12 @@
+---
+openapi: 3.0.0
+info:
+  title: API
+  version: 0.1
+servers:
+  - url: /v1
+tags:
+  - name: user
+    description: User entry-points
+  - name: node
+    description: Node entry-points
