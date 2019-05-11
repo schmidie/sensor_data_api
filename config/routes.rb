@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         post :create_sensor
         # GET /v1/nodes/<id>/get_sensors
         get :get_sensors
+        # POST /v1/nodes/<id>/sensor_data?<data>
+        post :create_sensor_data
       end
     end
 
